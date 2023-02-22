@@ -90,7 +90,9 @@ export class PokemonService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pokemon`;
+  async remove(term: string) {
+    const pokemon = await this.findOneByTerm(term);
+    await this.pokemonModel.remove(pokemon);
+    return `eliminado ${term}`;
   }
 }
